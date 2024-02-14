@@ -1,17 +1,12 @@
+<script setup lang="ts">
+defineProps({
+  color: String,
+});
+</script>
+
 <template>
   <div :style="{ backgroundColor: color }" class="chip"></div>
 </template>
-
-<script>
-export default {
-  props: {
-    color: {
-      type: String,
-      required: true
-    }
-  }
-}
-</script>
 
 <style scoped>
 .chip {
@@ -20,3 +15,4 @@ export default {
   border-radius: 50%;
 }
 </style>
+
