@@ -1,18 +1,4 @@
 <script lang="ts">
-defineProps({
-  width: {
-    type: Number,
-    required: true,
-  },
-  height: {
-    type: Number,
-    required: true,
-  },
-});
-
-export default {
-	name: "Board",
-};
 </script>
 
 <template>
@@ -20,7 +6,4 @@ export default {
 </template>
 
 <style scoped>
-.board {
-  
-}
 </style>
