@@ -59,22 +59,33 @@
       "vue-demi": [
         "../node_modules/nuxt/dist/app/compat/vue-demi"
       ],
+      "#vue-router": [
+        "./vue-router-stub"
+      ],
+      "#imports": [
+        "./imports"
+      ],
       "#build": [
         "."
       ],
-      "#build/*": [
-        "./*"
+      "#components": [
+        "./components"
       ]
     }
   },
   "include": [
     "./nuxt.d.ts",
     "../**/*",
+    "../node_modules/@nuxt/devtools/runtime",
+    "../node_modules/@nuxt/telemetry/runtime",
     ".."
   ],
   "exclude": [
     "../node_modules",
     "../node_modules/nuxt/node_modules",
-    "../dist"
+    "../node_modules/@nuxt/devtools/runtime/server",
+    "../node_modules/@nuxt/telemetry/runtime/server",
+    "../dist",
+    "../.output"
   ]
 }
