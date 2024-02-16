@@ -2,27 +2,17 @@
 const props = defineProps({
   player: {
     type: Number,
-    require: true,
-  }
-})
-
-
-</script>
-<template>
-  <div :class="{ 'black': player ===  1, 'white': player ===  2 }"></div>
-</template>
-
-<script setup lang="ts">
-const props = defineProps({
-  player: {
-    type: Number,
+    required: true,
+  },
+  position: {
+    type: Array,
     required: true,
   }
 })
 </script>
 
 <template>
-  <div :class="{ 'black': player ===  1, 'white': player ===  2 }"></div>
+  <div :class="{ 'black': player ===  1, 'white': player ===  0 }"></div>
 </template>
 
 <style scoped>
