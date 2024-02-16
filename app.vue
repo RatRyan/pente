@@ -20,8 +20,8 @@ function handleStartGame() {
           class="tile"
           v-for="(tile, colIndex) in row"
           :key="'tile-' + rowIndex + '-' + colIndex"
-          :x-pos="rowIndex"
-          :y-pos="colIndex"
+          :x-pos="colIndex"
+          :y-pos="rowIndex"
         />
       </div>
     </div>
