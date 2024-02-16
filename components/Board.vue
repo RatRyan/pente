@@ -1,7 +1,4 @@
 <script lang="ts">
-import type SpaceVue from "./Space.vue";
-import type Space from "./Space.vue";
-
 const props = defineComponent({
 	size: {
 		type: Number,
@@ -11,7 +8,19 @@ const props = defineComponent({
 </script>
 
 <template>
-	<SpaceVue></SpaceVue>
+	<div>
+    <div v-for="(row, rowIndex) in gameBoard" :key="'row-' + rowIndex">
+      <span
+        class="tile"
+        v-for="(tile, colIndex) in row"
+        :key="'tile-' + rowIndex + '-' + colIndex"
+      >
+        {{ tile }}
+      </span>
+    </div>
+  </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+
+</style>

@@ -1,37 +1,46 @@
 <script setup lang="ts">
 const props = defineProps({
-  player: {
-    type: Number,
-  },
-  xPos: {
-    type: Number,
-    require: true
-  },
-  yPos: {
-    type: Number,
-    require: true
-  }
-})
+	xPos: {
+		type: Number,
+		require: true,
+	},
+	yPos: {
+		type: Number,
+		require: true,
+	},
+});
+const clicked = ref(false);
+clicked.value = false;
+
+function playerClick() {
+	clicked.value = true;
+}
 </script>
 
 <template>
-  <div :class="{ 'black': player ===  1, 'white': player ===  0, 'blank': player === 2}"></div>
+	<button @click="playerClick()">
+		<div v-if="clicked">
+      
+    </div>
+	</button>
 </template>
 
 <style scoped>
-.black, .white, .blank {
-  position: absolute;
-  top:  0;
-  left:  0;
-  width:  100%;
-  height:  100%;
+.black,
+.white,
+.blank {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
 }
 
 .black {
-  background-color: black;
+	background-color: black;
 }
 
 .white {
-  background-color: white;
+	background-color: white;
 }
 </style>
