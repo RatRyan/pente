@@ -2,7 +2,6 @@
 const props = defineProps({
   player: {
     type: Number,
-    required: true,
   },
   position: {
     type: Array,
@@ -12,11 +11,11 @@ const props = defineProps({
 </script>
 
 <template>
-  <div :class="{ 'black': player ===  1, 'white': player ===  0 }"></div>
+  <div :class="{ 'black': player ===  1, 'white': player ===  0, 'blank': player === 2}"></div>
 </template>
 
 <style scoped>
-.black, .white {
+.black, .white, .blank {
   position: absolute;
   top:  0;
   left:  0;
