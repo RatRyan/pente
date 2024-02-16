@@ -1,6 +1,9 @@
-<script setup lang="ts">
-</script>
+<script setup lang="ts"></script>
 
 <template>
-	<p>test</p>
+  <div>
+    <label>Enter Board size:</label><br />
+    <input type="number" /><br />
+    <button>Start Game</button>
+  </div>
 </template>
