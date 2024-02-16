@@ -3,9 +3,13 @@ const props = defineProps({
   player: {
     type: Number,
   },
-  position: {
-    type: Array,
-    required: true,
+  xPos: {
+    type: Number,
+    require: true
+  },
+  yPos: {
+    type: Number,
+    require: true
   }
 })
 </script>
