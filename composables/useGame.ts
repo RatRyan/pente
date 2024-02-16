@@ -14,7 +14,7 @@ export function useGame() {
     for (let i = 0; i < size; i++) {
       newBoard[i] = [];
       for (let j = 0; j < size; j++) {
-        newBoard[i][j] = Tile.Empty;
+        newBoard[i][j] = Tile.White;
       }
     }
     gameBoard.value = newBoard;
