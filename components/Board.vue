@@ -1,12 +1,12 @@
 <script setup lang="ts">
-const { gameStarted, gameBoard, tileSize } = useGame();
+const { gameStarted, board, tileSize } = useGame();
 </script>
 
 <template>
   <div v-if="gameStarted" class="game-board">
     <div
       class="row"
-      v-for="(row, rowIndex) in gameBoard"
+      v-for="(row, rowIndex) in board"
       :key="'row-' + rowIndex"
     >
       <Tile
@@ -15,7 +15,7 @@ const { gameStarted, gameBoard, tileSize } = useGame();
         :key="'tile-' + rowIndex + '-' + colIndex"
         :x-pos="colIndex"
         :y-pos="rowIndex"
-        :sprite="gameBoard[colIndex][rowIndex]"
+        :sprite="board[colIndex][rowIndex]"
       />
     </div>
   </div>

@@ -1,14 +1,10 @@
-<script setup lang="ts">
-const { gameStarted, tileSize, gameBoard } = useGame();
-</script>
-
 <template>
   <div class="main-wrapper">
     <div class="side-panel-wrapper">
       <SidePanel />
     </div>
     <div class="game-wrapper">
-      <GameBoard />
+      <Board />
     </div>
   </div>
 </template>

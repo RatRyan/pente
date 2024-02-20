@@ -33,13 +33,13 @@ export function useGame() {
 
     boardSize.value = size;
     const center = size / 2 - 0.5;
-    placeStone(center, center);
+    board.value[center][center] = Tile.White;
     isPlayerTurn.value == true;
   }
 
   function placeStone(col: number, row: number) {
     let clickedTile = board.value[col][row];
-    if (clickedTile == Tile.Empty) return;
+    if (clickedTile != Tile.Empty) return;
 
     board.value[col][row] = Tile.Black;
     isPlayerTurn.value = false;

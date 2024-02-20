@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { gameStarted, setupBoard, gameBoard } = useGame();
+const { gameStarted, setupBoard, board } = useGame();
 
 const newGame = ref(false);
 const gridSize = ref(19);
