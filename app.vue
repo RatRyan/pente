@@ -1,5 +1,7 @@
 <script setup lang="ts">
 const { setupBoard, tileSize, gameBoard } = useGame();
+const { downloadLink } = useSaveData();
+
 const started = ref(false);
 const gridSize = ref(19);
 
@@ -44,7 +46,7 @@ function handleStartGame() {
               YOU INTO THE DARKNESS FOREST CREATURES STAY CLOSE TO THEIR KIN
               CLEANSING WATERS ERASE ALL MY SINS I AM THE ONE FROM THE EARTH
               TAKE MY HAND AND I'LL SHOW YOU MY SACRED HOME STAND ALL ALONE IN
-              THE LIGHT CLOSE YOUR EYES AND I'LL GUIDE YOU INTO THE DARKNESS 
+              THE LIGHT CLOSE YOUR EYES AND I'LL GUIDE YOU INTO THE DARKNESS
             </p>
             <h2>Also, throw the save game button down here :P</h2>
           </div>
