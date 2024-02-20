@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const { setupBoard, tileSize, gameBoard } = useGame();
+
 const started = ref(false);
 const gridSize = ref(19);
 
@@ -22,31 +23,14 @@ function handleStartGame() {
         </div>
         <div class="info">
           <div v-if="!started" class="start-game">
-            <button @click="handleStartGame" class="start-button">
+            <button @click="handleStartGame" class="game-button">
               New Game
             </button>
-            <button class="start-button">Load Game</button>
-            <!-- <div>
-              <p>Enter Board Size</p>
-              <input type="number" v-model="gridSize" /><br />
-              <button @click="handleStartGame()">Start Game</button>
-            </div> -->
+            <p>- or -</p>
+            <LoadButton />
           </div>
           <div v-else class="game-status">
-            <h2>
-              this is the area where we would display player/bot info like how
-              many captures each player has
-            </h2>
-            <p>
-              AS MY BODY BEGINS TO DECAY ROSES ENTWINE MY BONES WHERE I LAY I AM
-              THE ONE FROM THE EARTH TAKE MY HAND AND I'LL SHOW YOU MY SACRED
-              HOME STAND ALL ALONE IN THE LIGHT CLOSE YOUR EYES AND I'LL GUIDE
-              YOU INTO THE DARKNESS FOREST CREATURES STAY CLOSE TO THEIR KIN
-              CLEANSING WATERS ERASE ALL MY SINS I AM THE ONE FROM THE EARTH
-              TAKE MY HAND AND I'LL SHOW YOU MY SACRED HOME STAND ALL ALONE IN
-              THE LIGHT CLOSE YOUR EYES AND I'LL GUIDE YOU INTO THE DARKNESS 
-            </p>
-            <h2>Also, throw the save game button down here :P</h2>
+            <SaveButton />
           </div>
         </div>
       </div>
@@ -68,7 +52,6 @@ function handleStartGame() {
           />
         </div>
       </div>
-      <div v-else></div>
     </div>
   </div>
 </template>
@@ -124,15 +107,6 @@ function handleStartGame() {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-.start-button {
-  font-size: 20px;
-  padding: 15px;
-  border: none;
-  border-radius: 7px;
-  margin: 10px;
-  background-color: #161414;
-  color: white;
 }
 .game-wrapper {
   height: 100vh;
