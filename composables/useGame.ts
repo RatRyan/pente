@@ -21,14 +21,25 @@ export function useGame() {
     }
     gameBoard.value = newBoard;
     tileSize.value =
-      Math.round((height.value - height.value * 0.2) / size) + 'px';
+      Math.round((height.value - height.value * 0.3) / size) + 'px';
+  }
+
+  function placeStone(row: number, col: number) {
+    let clickedTile = gameBoard.value[col][row];
+    if (clickedTile != Tile.Empty) return;
+
+    if (isPlayerTurn.value) {
+      clickedTile = Tile.Black;
+    } else {
+      clickedTile = Tile.White;
+    }
   }
 
   return {
     Tile,
     tileSize,
     gameBoard,
-    isPlayerTurn,
     setupBoard,
+    placeStone,
   };
 }
