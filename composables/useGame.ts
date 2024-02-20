@@ -1,12 +1,14 @@
+const { height } = useWindowSize();
+
 export function useGame() {
   enum Tile {
+    Empty,
     Black,
     White,
-    Empty,
   }
 
-  const boardSize = useState('boardSize', () => 0);
   const gameBoard = useState<Tile[][]>('gameBoard', () => []);
+  const tileSize = useState('tileSize', () => '');
   const isPlayerTurn = useState('isPlayerTurn', () => false);
 
   function setupBoard(size: number) {
@@ -14,14 +16,17 @@ export function useGame() {
     for (let i = 0; i < size; i++) {
       newBoard[i] = [];
       for (let j = 0; j < size; j++) {
-        newBoard[i][j] = Tile.White;
+        newBoard[i][j] = Tile.Empty;
       }
     }
     gameBoard.value = newBoard;
+    tileSize.value =
+      Math.round((height.value - height.value * 0.2) / size) + 'px';
   }
 
   return {
-    boardSize,
+    Tile,
+    tileSize,
     gameBoard,
     isPlayerTurn,
     setupBoard,
