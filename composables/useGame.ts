@@ -34,66 +34,15 @@ export function useGame() {
     boardSize.value = size;
     const center = size / 2 - 0.5;
     placeStone(center, center);
+    isPlayerTurn.value == true;
   }
 
-  function aiMove(col: number, row: number) {
-    if (getRandomBool()) {
-      if (getRandomBool()) {
-        if (getRandomBool()) {
-            placeStone(col + 1, row + 1);
-        } else {
-          placeStone(col + 1, row - 1);
-        }
-      } else {
-        if (getRandomBool()) {
-          placeStone(col - 1, row + 1);
-        } else {
-          placeStone(col - 1, row - 1);
-        }
-      }
-    } else {
-      if (getRandomBool()) {
-        if (getRandomBool()) {
-          placeStone(col, row + 1);
-        } else {
-          placeStone(col, row - 1);
-        }
-      } else {
-        if (getRandomBool()) {
-          placeStone(col - 1, row);
-        } else {
-          placeStone(col - 1, row);
-        }
-      }
-    }
-  }
+  function placeStone(col: number, row: number) {
+    let clickedTile = board.value[col][row];
+    if (clickedTile == Tile.Empty) return;
 
-  function checkWin(col: number, row: number) {
-    
-    if (playerCaptures == 5 || aiCaptures == 5) {
-      if(playerCaptures == 5) { 
-        winner = 'player'
-      } else {
-        winner = 'ai'
-      }
-    } else {
-      
-    }
-  }
-
-  function getRandomBool() {
-    return Math.random() > 0.5;
-  }
-
-  function getRandomInt() {
-    return Math.floor(Math.random() * (boardSize +  1));
-  }
-
-  function isEmptyTile(col: number, row: number) {
-    if (gameBoard.value[col][row] === Tile.Empty) {
-      return true
-    }
-    return false
+    board.value[col][row] = Tile.Black;
+    isPlayerTurn.value = false;
   }
 
   return {
