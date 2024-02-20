@@ -1,6 +1,6 @@
-const { height } = useWindowSize();
-
 export function useGame() {
+  const { height } = useWindowSize();
+
   enum Tile {
     Empty = 'empty.png',
     Black = 'black.png',

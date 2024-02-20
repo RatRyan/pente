@@ -1,11 +1,15 @@
 export function useSaveData() {
-  const { gameBoard } = useGame();
-
+  const { gameBoard, tileSize } = useGame();
+  
   const downloadLink = useState('downloadLink', () => '');
 
   function saveGame() {
-    const gameBoardJson = JSON.stringify(gameBoard);
-    const blob = new Blob([gameBoardJson], { type: 'application/json' });
+    const gameData = {
+      gameBoard: gameBoard.value,
+      tileSize: tileSize.value,
+    };
+    const gameDataJson = JSON.stringify(gameData);
+    const blob = new Blob([gameDataJson], { type: 'application/json' });
     downloadLink.value = URL.createObjectURL(blob);
   }
 
