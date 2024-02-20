@@ -1,7 +1,7 @@
 <script setup lang="ts">
 const { setupBoard, gameBoard } = useGame();
 const started = ref(false);
-const gridSize = ref(39);
+const gridSize = ref(9);
 
 function handleStartGame() {
   if (gridSize.value > 39 || gridSize.value < 9 || gridSize.value % 2 != 1)
