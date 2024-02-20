@@ -1,21 +1,26 @@
 <script setup lang="ts">
-const { Tile, gameBoard, tileSize } = useGame();
-const graphic = ref('dronky.png');
-
+const { Tile, gameBoard, tileSize, isPlayerTurn } = useGame();
 const props = defineProps({
   xPos: Number,
   yPos: Number,
+  sprite: String,
 });
 
 function onClickTile() {
-  //@ts-ignore
-  gameBoard.value[props.xPos][props.yPos] = 0;
+  if (isPlayerTurn.value) {
+    //@ts-ignore
+    gameBoard.value[props.xPos][props.yPos] = Tile.Black;
+  } else {
+    //@ts-ignore
+    gameBoard.value[props.xPos][props.yPos] = Tile.White;
+  }
+  isPlayerTurn.value = !isPlayerTurn.value;
 }
 </script>
 
 <template>
-  <button @Click="onClickTile()">
-    <img :src="graphic" />
+  <button>
+    <img @click="onClickTile()" :src="sprite" />
   </button>
 </template>
 
@@ -26,6 +31,10 @@ button {
   margin: 0px;
   padding: 0px;
   border: none;
+  transition: filter 0.3s ease-out;
+}
+button:hover {
+  filter: brightness(50%);
 }
 img {
   width: 100%;
