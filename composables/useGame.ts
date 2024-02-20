@@ -24,7 +24,7 @@ export function useGame() {
       Math.round((height.value - height.value * 0.3) / size) + 'px';
   }
 
-  function placeStone(row: number, col: number) {
+  function placeStone(col: number, row: number) {
     let clickedTile = gameBoard.value[col][row];
     if (clickedTile != Tile.Empty) return;
 
@@ -33,6 +33,9 @@ export function useGame() {
     } else {
       clickedTile = Tile.White;
     }
+
+    gameBoard.value[col][row] = clickedTile;
+    isPlayerTurn.value = !isPlayerTurn.value;
   }
 
   return {
