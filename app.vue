@@ -1,74 +1,14 @@
 <script setup lang="ts">
-const { setupBoard, tileSize, gameBoard } = useGame();
-const started = ref(false);
-const gridSize = ref(19);
-
-function handleStartGame() {
-  if (gridSize.value > 39 || gridSize.value < 9 || gridSize.value % 2 != 1)
-    return;
-
-  setupBoard(gridSize.value);
-  started.value = true;
-}
+const { gameStarted, tileSize, gameBoard } = useGame();
 </script>
 
 <template>
   <div class="main-wrapper">
     <div class="side-panel-wrapper">
-      <div class="side-panel">
-        <div class="title">
-          <p>Pente</p>
-          <img src="/logo.png" />
-        </div>
-        <div class="info">
-          <div v-if="!started" class="start-game">
-            <button @click="handleStartGame" class="start-button">
-              New Game
-            </button>
-            <button class="start-button">Load Game</button>
-            <!-- <div>
-              <p>Enter Board Size</p>
-              <input type="number" v-model="gridSize" /><br />
-              <button @click="handleStartGame()">Start Game</button>
-            </div> -->
-          </div>
-          <div v-else class="game-status">
-            <h2>
-              this is the area where we would display player/bot info like how
-              many captures each player has
-            </h2>
-            <p>
-              AS MY BODY BEGINS TO DECAY ROSES ENTWINE MY BONES WHERE I LAY I AM
-              THE ONE FROM THE EARTH TAKE MY HAND AND I'LL SHOW YOU MY SACRED
-              HOME STAND ALL ALONE IN THE LIGHT CLOSE YOUR EYES AND I'LL GUIDE
-              YOU INTO THE DARKNESS FOREST CREATURES STAY CLOSE TO THEIR KIN
-              CLEANSING WATERS ERASE ALL MY SINS I AM THE ONE FROM THE EARTH
-              TAKE MY HAND AND I'LL SHOW YOU MY SACRED HOME STAND ALL ALONE IN
-              THE LIGHT CLOSE YOUR EYES AND I'LL GUIDE YOU INTO THE DARKNESS 
-            </p>
-            <h2>Also, throw the save game button down here :P</h2>
-          </div>
-        </div>
-      </div>
+      <SidePanel />
     </div>
     <div class="game-wrapper">
-      <div v-if="started" class="game-board">
-        <div
-          class="row"
-          v-for="(row, rowIndex) in gameBoard"
-          :key="'row-' + rowIndex"
-        >
-          <Tile
-            class="tile"
-            v-for="(tile, colIndex) in row"
-            :key="'tile-' + rowIndex + '-' + colIndex"
-            :x-pos="colIndex"
-            :y-pos="rowIndex"
-            :sprite="gameBoard[colIndex][rowIndex]"
-          />
-        </div>
-      </div>
-      <div v-else></div>
+      <GameBoard />
     </div>
   </div>
 </template>
@@ -86,66 +26,11 @@ function handleStartGame() {
   align-items: center;
   justify-content: center;
 }
-.side-panel {
-  width: 95%;
-  height: 97.5%;
-  border: solid 1px rgb(66, 66, 66);
-  border-radius: 7px;
-  background-color: #f0f0f0;
-  box-shadow: 10px 10px 30px 10px #262626;
-  display: flex;
-  flex-direction: column;
-}
-.title {
-  font-size: 80px;
-  text-align: center;
-  font-family: 'Poppins';
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  p {
-    margin: 1rem;
-    margin-right: 2rem;
-  }
-  img {
-    width: 80px;
-    height: 80px;
-  }
-}
-.info {
-  flex: 1;
-  margin: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.start-game {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.start-button {
-  font-size: 20px;
-  padding: 15px;
-  border: none;
-  border-radius: 7px;
-  margin: 10px;
-  background-color: #161414;
-  color: white;
-}
 .game-wrapper {
   height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
   flex: 1;
-}
-.game-board {
-  border: #231d10 ridge 2px;
-  box-shadow: 10px 10px 60px 5px #242323;
-}
-.row {
-  height: v-bind(tileSize);
 }
 </style>
