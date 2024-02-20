@@ -1,5 +1,6 @@
 <script setup lang="ts">
 const { Tile, gameBoard, tileSize } = useGame();
+const graphic = ref('dronky.png');
 
 const props = defineProps({
   xPos: Number,
@@ -14,10 +15,7 @@ function onClickTile() {
 
 <template>
   <button @Click="onClickTile()">
-    {{
-      //@ts-ignore
-      gameBoard[xPos][yPos]
-    }}
+    <img :src="graphic" />
   </button>
 </template>
 
@@ -28,5 +26,10 @@ button {
   margin: 0px;
   padding: 0px;
   border: none;
+}
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 </style>

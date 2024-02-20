@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { setupBoard, gameBoard } = useGame();
+const { setupBoard, tileSize, gameBoard } = useGame();
 const started = ref(false);
 const gridSize = ref(9);
 
@@ -15,7 +15,11 @@ function handleStartGame() {
 <template>
   <div class="game-wrapper">
     <div v-if="started">
-      <div v-for="(row, rowIndex) in gameBoard" :key="'row-' + rowIndex">
+      <div
+        class="row"
+        v-for="(row, rowIndex) in gameBoard"
+        :key="'row-' + rowIndex"
+      >
         <Tile
           class="tile"
           v-for="(tile, colIndex) in row"
@@ -39,5 +43,8 @@ function handleStartGame() {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.row {
+  height: v-bind(tileSize);
 }
 </style>
