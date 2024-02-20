@@ -1,26 +1,17 @@
 <script setup lang="ts">
-const { Tile, gameBoard, tileSize, isPlayerTurn } = useGame();
-const props = defineProps({
-  xPos: Number,
-  yPos: Number,
+const { tileSize, placeStone } = useGame();
+
+defineProps({
+  // need to set a default value for typescript
+  xPos: { Number, default: 0 },
+  yPos: { Number, default: 0 },
   sprite: String,
 });
-
-function onClickTile() {
-  if (isPlayerTurn.value) {
-    //@ts-ignore
-    gameBoard.value[props.xPos][props.yPos] = Tile.Black;
-  } else {
-    //@ts-ignore
-    gameBoard.value[props.xPos][props.yPos] = Tile.White;
-  }
-  isPlayerTurn.value = !isPlayerTurn.value;
-}
 </script>
 
 <template>
   <button>
-    <img @click="onClickTile()" :src="sprite" />
+    <img @click="placeStone(xPos, yPos)" :src="sprite" />
   </button>
 </template>
 
@@ -34,9 +25,9 @@ button {
   transition: filter 0.3s ease-out;
 }
 button:hover {
-  filter: brightness(50%);
+  filter: brightness(90%);
 }
-img {
+button img {
   width: 100%;
   height: 100%;
   object-fit: contain;
