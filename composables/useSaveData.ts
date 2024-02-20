@@ -7,6 +7,8 @@ export function useSaveData() {
     const gameBoardJson = JSON.stringify(gameBoard);
     const blob = new Blob([gameBoardJson], { type: 'application/json' });
     downloadLink.value = URL.createObjectURL(blob);
+
+    
   }
 
   function loadGame() {}

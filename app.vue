@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const { setupBoard, tileSize, gameBoard } = useGame();
-const { downloadLink } = useSaveData();
+const { downloadLink, saveGame } = useSaveData();
 
 const started = ref(false);
 const gridSize = ref(19);
@@ -24,10 +24,10 @@ function handleStartGame() {
         </div>
         <div class="info">
           <div v-if="!started" class="start-game">
-            <button @click="handleStartGame" class="start-button">
+            <button @click="handleStartGame" class="game-button">
               New Game
             </button>
-            <button class="start-button">Load Game</button>
+            <button class="game-button">Load Game</button>
             <!-- <div>
               <p>Enter Board Size</p>
               <input type="number" v-model="gridSize" /><br />
@@ -48,7 +48,14 @@ function handleStartGame() {
               TAKE MY HAND AND I'LL SHOW YOU MY SACRED HOME STAND ALL ALONE IN
               THE LIGHT CLOSE YOUR EYES AND I'LL GUIDE YOU INTO THE DARKNESS
             </p>
-            <h2>Also, throw the save game button down here :P</h2>
+            <a
+              @click="saveGame"
+              :href="downloadLink"
+              download
+              class="game-button"
+            >
+              download
+            </a>
           </div>
         </div>
       </div>
@@ -127,7 +134,8 @@ function handleStartGame() {
   flex-direction: column;
   align-items: center;
 }
-.start-button {
+.game-button {
+  text-decoration: none;
   font-size: 20px;
   padding: 15px;
   border: none;
