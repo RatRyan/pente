@@ -80,6 +80,7 @@ function handleStartGame() {
   flex-direction: column;
 }
 .title {
+  background-color: #e6e6e6;
   font-size: 80px;
   text-align: center;
   font-family: 'Poppins';
@@ -98,15 +99,16 @@ function handleStartGame() {
 }
 .info {
   flex: 1;
+  flex-direction: column;
   margin: 10px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: start;
 }
 .start-game {
   display: flex;
-  flex-direction: column;
   align-items: center;
+  margin-top: 30px;
 }
 .game-wrapper {
   height: 100vh;
