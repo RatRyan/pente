@@ -1,15 +1,20 @@
 <script setup lang="ts">
-const { gameStarted, setupBoard } = useGame();
+const { gameStarted, setupBoard, gameBoard } = useGame();
 
 const newGame = ref(false);
 const gridSize = ref(19);
 
-function handleStartGame() {
+function startGame() {
   if (gridSize.value > 39 || gridSize.value < 9 || gridSize.value % 2 != 1)
     return;
 
   setupBoard(gridSize.value);
   gameStarted.value = true;
+}
+
+function backToMenu() {
+  gameStarted.value = false;
+  newGame.value = false;
 }
 </script>
 
@@ -20,12 +25,32 @@ function handleStartGame() {
       <img src="/logo.png" />
     </div>
     <div class="panel-content">
-      <div v-if="!gameStarted" class="start-game">
-        <button @click="handleStartGame" class="game-button">New Game</button>
+      <div v-if="!gameStarted && !newGame" class="start-game">
+        <button @click="newGame = true" class="game-button">New Game</button>
         <LoadButton />
       </div>
-      <div v-else class="game-status">
-        <SaveButton />
+      <div v-if="!gameStarted && newGame" class="start-game">
+        <div class="create-board">
+          <label>Enter Board Size:</label>
+          <input type="number" v-model="gridSize" class="board-size" />
+          <button @click="startGame()" class="game-button">Start Game</button>
+        </div>
+      </div>
+      <div v-if="gameStarted" class="game-status">
+        <div class="capture-trackers">
+          <div class="stat-tracker">
+            <h2>Player Captures: {{ 0 }}</h2>
+          </div>
+          <div class="stat-tracker">
+            <h2>Computer Captures: {{ 0 }}</h2>
+          </div>
+        </div>
+        <div>
+          <SaveButton />
+          <button @click="backToMenu()" class="game-button">
+            Back to Menu
+          </button>
+        </div>
       </div>
     </div>
   </div>
@@ -63,7 +88,8 @@ function handleStartGame() {
 }
 .panel-content {
   flex: 1;
-  flex-direction: column;
+  display: flex;
+  justify-content: space-evenly;
   margin-top: 30px;
 }
 .start-game {
@@ -72,11 +98,35 @@ function handleStartGame() {
   justify-content: space-around;
   margin: 0px 50px;
 }
-.instructions {
+label {
+  font-family: 'poppins';
+  font-weight: 500;
+  font-size: 30px;
+}
+.create-board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.board-size {
+  margin: 20px 0px;
+  font-size: 30px;
+  text-align: center;
+  width: 70px;
+  padding: 10px 0px;
+  border-radius: 7px;
+  border: none;
 }
 .game-status {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
+}
+.capture-trackers {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  padding: 100px;
 }
 </style>
