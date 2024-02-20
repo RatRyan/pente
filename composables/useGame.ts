@@ -67,7 +67,7 @@ export function useGame() {
     if (getRandomBool()) {
       if (getRandomBool()) {
         if (getRandomBool()) {
-            placeStone(col + 1, row + 1);
+          placeStone(col + 1, row + 1);
         } else {
           placeStone(col + 1, row - 1);
         }
@@ -96,15 +96,44 @@ export function useGame() {
   }
 
   function checkWin(col: number, row: number) {
-    
+    gameBoard.value[col][row]
     if (playerCaptures == 5 || aiCaptures == 5) {
-      if(playerCaptures == 5) { 
+      if (playerCaptures == 5) {
         winner = 'player'
       } else {
         winner = 'ai'
       }
-    } else {
-      
+    } 
+    
+    for (let i =  0; i < boardSize; i++) {
+      if (gameBoard.value[col][i] === Tile.Black && gameBoard.value[col][i +  1] === Tile.Black &&
+          gameBoard.value[col][i +  2] === Tile.Black && gameBoard.value[col][i +  3] === Tile.Black &&
+          gameBoard.value[col][i +  4] === Tile.Black) {
+        winner = 'player';
+        return;
+      }
+      if (gameBoard.value[col][i] === Tile.White && gameBoard.value[col][i +  1] === Tile.White &&
+          gameBoard.value[col][i +  2] === Tile.White && gameBoard.value[col][i +  3] === Tile.White &&
+          gameBoard.value[col][i +  4] === Tile.White) {
+        winner = 'ai';
+        return;
+      }
+    }
+  
+    // Check vertically
+    for (let i =  0; i < boardSize; i++) {
+      if (gameBoard.value[i][row] === Tile.Black && gameBoard.value[i +  1][row] === Tile.Black &&
+          gameBoard.value[i +  2][row] === Tile.Black && gameBoard.value[i +  3][row] === Tile.Black &&
+          gameBoard.value[i +  4][row] === Tile.Black) {
+        winner = 'player';
+        return;
+      }
+      if (gameBoard.value[i][row] === Tile.White && gameBoard.value[i +  1][row] === Tile.White &&
+          gameBoard.value[i +  2][row] === Tile.White && gameBoard.value[i +  3][row] === Tile.White &&
+          gameBoard.value[i +  4][row] === Tile.White) {
+        winner = 'ai';
+        return;
+      }
     }
   }
 
@@ -113,7 +142,7 @@ export function useGame() {
   }
 
   function getRandomInt() {
-    return Math.floor(Math.random() * (boardSize +  1));
+    return Math.floor(Math.random() * (boardSize + 1));
   }
 
   function isEmptyTile(col: number, row: number) {
