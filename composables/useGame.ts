@@ -15,6 +15,9 @@ export function useGame() {
   const isPlayerTurn = useState('isPlayerTurn', () => false);
   const gameStarted = useState('started', () => false);
   let boardSize: number;
+  let playerCaptures = 0;
+  let aiCaptures = 0;
+  let winner;
 
   function setupBoard(size: number) {
     const newBoard: Tile[][] = [];
@@ -64,7 +67,7 @@ export function useGame() {
     if (getRandomBool()) {
       if (getRandomBool()) {
         if (getRandomBool()) {
-          placeStone(col + 1, row + 1);
+            placeStone(col + 1, row + 1);
         } else {
           placeStone(col + 1, row - 1);
         }
@@ -92,8 +95,32 @@ export function useGame() {
     }
   }
 
+  function checkWin(col: number, row: number) {
+    
+    if (playerCaptures == 5 || aiCaptures == 5) {
+      if(playerCaptures == 5) { 
+        winner = 'player'
+      } else {
+        winner = 'ai'
+      }
+    } else {
+      
+    }
+  }
+
   function getRandomBool() {
     return Math.random() > 0.5;
+  }
+
+  function getRandomInt() {
+    return Math.floor(Math.random() * (boardSize +  1));
+  }
+
+  function isEmptyTile(col: number, row: number) {
+    if (gameBoard.value[col][row] === Tile.Empty) {
+      return true
+    }
+    return false
   }
 
   return {
@@ -103,5 +130,6 @@ export function useGame() {
     gameStarted,
     setupBoard,
     placeStone,
+    winner,
   };
 }
