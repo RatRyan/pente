@@ -1,6 +1,6 @@
 export function useSaveData() {
-  const { gameBoard, tileSize } = useGame();
-  
+  const { gameBoard, tileSize, started } = useGame();
+
   const downloadLink = useState('downloadLink', () => '');
 
   function saveGame() {
@@ -22,6 +22,10 @@ export function useSaveData() {
       try {
         //@ts-ignore
         const jsonData = JSON.parse(e.target.result);
+
+        gameBoard.value = jsonData.gameBoard;
+        tileSize.value = jsonData.tileSize;
+        started.value = true;
 
         console.log(jsonData);
       } catch (error) {
