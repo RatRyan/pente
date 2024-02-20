@@ -2,9 +2,9 @@ const { height } = useWindowSize();
 
 export function useGame() {
   enum Tile {
-    Empty = '',
-    Black = '~/assets/img/dronky.png',
-    White = '',
+    Empty = 'empty.png',
+    Black = 'black.png',
+    White = 'white.png',
   }
 
   const gameBoard = useState<Tile[][]>('gameBoard', () => []);

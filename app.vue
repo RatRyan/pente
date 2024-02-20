@@ -26,6 +26,7 @@ function handleStartGame() {
           :key="'tile-' + rowIndex + '-' + colIndex"
           :x-pos="colIndex"
           :y-pos="rowIndex"
+          :sprite="gameBoard[colIndex][rowIndex]"
         />
       </div>
     </div>
