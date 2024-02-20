@@ -5,5 +5,6 @@ export default defineConfig({
   plugins: [Vue()],
   test: {
     globals: true,
+    environment: "happy-dom"
   },
 });

@@ -10,7 +10,7 @@ defineProps({
 </script>
 
 <template>
-  <button>
+  <button class="tile">
     <img @click="placeStone(xPos, yPos)" :src="sprite" />
   </button>
 </template>
