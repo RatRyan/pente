@@ -14,8 +14,26 @@ function handleStartGame() {
 
 <template>
   <div class="main-wrapper">
-    <div class="info-panel">
-      <div></div>
+    <div class="side-panel-wrapper">
+      <div class="side-panel">
+        <div class="title">
+          <p>Pente</p>
+          <img src="/logo.png" />
+        </div>
+        <div class="info">
+          <div v-if="!started" class="start-game">
+            <button @click="handleStartGame" class="start-button">
+              New Game
+            </button>
+            <button class="start-button">Load Game</button>
+            <!-- <div>
+              <p>Enter Board Size</p>
+              <input type="number" v-model="gridSize" /><br />
+              <button @click="handleStartGame()">Start Game</button>
+            </div> -->
+          </div>
+        </div>
+      </div>
     </div>
     <div class="game-wrapper">
       <div v-if="started" class="game-board">
@@ -34,11 +52,7 @@ function handleStartGame() {
           />
         </div>
       </div>
-      <div v-else>
-        <p>Enter Board Size</p>
-        <input type="number" v-model="gridSize" /><br />
-        <button @click="handleStartGame()">Start Game</button>
-      </div>
+      <div v-else></div>
     </div>
   </div>
 </template>
@@ -48,9 +62,61 @@ function handleStartGame() {
   height: 100vh;
   display: flex;
 }
-.info-panel {
-  width: 35vw;
+.side-panel-wrapper {
+  width: 550px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.side-panel {
+  width: 95%;
+  height: 97.5%;
+  border: solid 1px rgb(66, 66, 66);
+  border-radius: 7px;
+  background-color: #f0f0f0;
+  box-shadow: 10px 10px 30px 10px #262626;
+  display: flex;
+  flex-direction: column;
+}
+.title {
+  font-size: 80px;
+  text-align: center;
+  font-family: 'Poppins';
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  p {
+    margin: 1rem;
+    margin-right: 2rem;
+  }
+  img {
+    width: 80px;
+    height: 80px;
+  }
+}
+.info {
+  flex: 1;
+  margin: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.start-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.start-button {
+  font-size: 20px;
+  padding: 15px;
+  border: none;
+  border-radius: 7px;
+  margin: 10px;
   background-color: #161414;
+  color: white;
 }
 .game-wrapper {
   height: 100vh;
@@ -60,7 +126,7 @@ function handleStartGame() {
   flex: 1;
 }
 .game-board {
-  border: #161414 ridge 3px;
+  border: #231d10 ridge 2px;
   box-shadow: 10px 10px 60px 5px #242323;
 }
 .row {
