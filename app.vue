@@ -1,6 +1,6 @@
 <script setup lang="ts">
 const { setupBoard, tileSize, gameBoard } = useGame();
-const { downloadLink, saveGame } = useSaveData();
+const { downloadLink, saveGame, loadGame } = useSaveData();
 
 const started = ref(false);
 const gridSize = ref(19);
@@ -27,36 +27,10 @@ function handleStartGame() {
             <button @click="handleStartGame" class="game-button">
               New Game
             </button>
-            <button class="game-button">Load Game</button>
-            <!-- <div>
-              <p>Enter Board Size</p>
-              <input type="number" v-model="gridSize" /><br />
-              <button @click="handleStartGame()">Start Game</button>
-            </div> -->
+            <p>- or -</p>
+            <LoadButton />
           </div>
-          <div v-else class="game-status">
-            <h2>
-              this is the area where we would display player/bot info like how
-              many captures each player has
-            </h2>
-            <p>
-              AS MY BODY BEGINS TO DECAY ROSES ENTWINE MY BONES WHERE I LAY I AM
-              THE ONE FROM THE EARTH TAKE MY HAND AND I'LL SHOW YOU MY SACRED
-              HOME STAND ALL ALONE IN THE LIGHT CLOSE YOUR EYES AND I'LL GUIDE
-              YOU INTO THE DARKNESS FOREST CREATURES STAY CLOSE TO THEIR KIN
-              CLEANSING WATERS ERASE ALL MY SINS I AM THE ONE FROM THE EARTH
-              TAKE MY HAND AND I'LL SHOW YOU MY SACRED HOME STAND ALL ALONE IN
-              THE LIGHT CLOSE YOUR EYES AND I'LL GUIDE YOU INTO THE DARKNESS
-            </p>
-            <a
-              @click="saveGame"
-              :href="downloadLink"
-              download
-              class="game-button"
-            >
-              download
-            </a>
-          </div>
+          <div v-else class="game-status"></div>
         </div>
       </div>
     </div>
@@ -133,16 +107,6 @@ function handleStartGame() {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-.game-button {
-  text-decoration: none;
-  font-size: 20px;
-  padding: 15px;
-  border: none;
-  border-radius: 7px;
-  margin: 10px;
-  background-color: #161414;
-  color: white;
 }
 .game-wrapper {
   height: 100vh;

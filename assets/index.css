@@ -2,3 +2,14 @@ body {
   margin: 0;
   background-color: #393737;
 }
+
+.game-button {
+  text-decoration: none;
+  font-size: 20px;
+  padding: 15px;
+  border: none;
+  border-radius: 7px;
+  margin: 10px;
+  background-color: #161414;
+  color: white;
+}
