@@ -1,6 +1,5 @@
 <script setup lang="ts">
 const { setupBoard, tileSize, gameBoard } = useGame();
-const { downloadLink, saveGame, loadGame } = useSaveData();
 
 const started = ref(false);
 const gridSize = ref(19);
@@ -30,7 +29,9 @@ function handleStartGame() {
             <p>- or -</p>
             <LoadButton />
           </div>
-          <div v-else class="game-status"></div>
+          <div v-else class="game-status">
+            <SaveButton />
+          </div>
         </div>
       </div>
     </div>
@@ -51,7 +52,6 @@ function handleStartGame() {
           />
         </div>
       </div>
-      <div v-else></div>
     </div>
   </div>
 </template>
