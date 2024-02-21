@@ -67,7 +67,14 @@ export function useGame() {
   }
 
   function checkCapture(col: number, row: number, dCol: number, dRow: number) {
+    let count = 0;
+    let player = board.value[col][row];
+    // let pieces[];
+
+
+    for (let i = 0; i < 5; i++) {
       
+    }
   }
 
   function checkLine(col: number, row: number, dCol: number, dRow: number) {
