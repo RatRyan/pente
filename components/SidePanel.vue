@@ -126,7 +126,7 @@ label {
 .capture-trackers {
   display: flex;
   flex-direction: column;
-  align-items: start;
+  align-items: flex-start;
   padding: 100px;
 }
 </style>
