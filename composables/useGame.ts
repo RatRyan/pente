@@ -15,7 +15,6 @@ export function useGame() {
   const tileSize = useState('tileSize', () => '');
   const playerCaptures = useState('playerCaptures', () => 0);
   const computerCaptures = useState('computersCaptures', () => 0);
-  const isPlayerTurn = useState('isPlayerTurn', () => false);
   const gameStarted = useState('gameStarted', () => false);
   const winner = useState<'player' | 'computer' | null>('winner', () => null);
 
@@ -34,7 +33,6 @@ export function useGame() {
     boardSize.value = size;
     const center = size / 2 - 0.5;
     board.value[center][center] = Tile.White;
-    isPlayerTurn.value == true;
   }
 
   function placeStone(col: number, row: number) {
@@ -42,7 +40,6 @@ export function useGame() {
     if (clickedTile != Tile.Empty) return;
 
     board.value[col][row] = Tile.Black;
-    isPlayerTurn.value = false;
     while (true) {
       const row = Math.floor(Math.random() * boardSize.value);
       const col = Math.floor(Math.random() * boardSize.value);
@@ -60,6 +57,17 @@ export function useGame() {
     checkLine(col, row, 0, 1);
     checkLine(col, row, 1, 1);
     checkLine(col, row, 1, -1);
+  }
+
+  function checkForCapture(col: number, row: number) {
+    checkCapture(col, row, 1, 0); // Right
+    checkCapture(col, row, -1, 0); // Left
+    checkCapture(col, row, 0, 1); // Down
+    checkCapture(col, row, 0, -1); // Up
+  }
+
+  function checkCapture(col: number, row: number, dCol: number, dRow: number) {
+      
   }
 
   function checkLine(col: number, row: number, dCol: number, dRow: number) {
@@ -90,6 +98,15 @@ export function useGame() {
   }
 
   function winCheck() {
+    for (let i = 0; i < boardSize.value; i++) {
+      for (let j = 0; j < boardSize.value; j++) {
+        if (board.value[i][j] !== Tile.Empty) {
+          checkLineWin(i, j);
+          checkForCapture(i, j);
+        }
+      }
+    }
+
     if (playerCaptures.value === 5) {
       winner.value = 'player';
       return;
@@ -98,19 +115,7 @@ export function useGame() {
       winner.value = 'computer';
       return;
     }
-
-    // Iterate over the entire board
-    for (let i = 0; i < boardSize.value; i++) {
-      for (let j = 0; j < boardSize.value; j++) {
-        // Check for a win condition if the tile is not empty
-        if (board.value[i][j] !== Tile.Empty) {
-          checkLineWin(i, j);
-        }
-      }
-    }
   }
-
-  function captureCheck(col: number, row: number) {}
 
   return {
     Tile,
