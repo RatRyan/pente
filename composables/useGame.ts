@@ -94,7 +94,7 @@ export function useGame() {
     // Nested for loop for checking cardinals + intercardinals
     for (let y = -1; y < 2; y++) {
       for (let x = -1; x < 2; x++) {
-        checkCapture(col, row, x, y);
+        if (checkCapture(col, row, x, y)) return;
       }
     }
   }
@@ -121,6 +121,7 @@ export function useGame() {
         stoneColor == Tile.Black
           ? (playerCaptures.value += 2)
           : (computerCaptures.value += 2);
+        return true;
       }
     }
   }
