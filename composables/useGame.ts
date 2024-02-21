@@ -43,10 +43,53 @@ export function useGame() {
 
     board.value[col][row] = Tile.Black;
     isPlayerTurn.value = false;
+    while (true) {
+      const row = Math.floor(Math.random() * boardSize.value);
+      const col = Math.floor(Math.random() * boardSize.value);
+
+      if (board.value[col][row] == Tile.Empty) {
+        board.value[col][row] = Tile.White;
+        break;
+      }
+    }
     winCheck(col, row);
   }
 
-  function winCheck(col: number, row: number) {
+  function checkLineWin(col: number, row: number) {
+    if (checkLine(col, row, 1, 0)) return;
+    if (checkLine(col, row, 0, 1)) return;
+    if (checkLine(col, row, 1, 1)) return;
+    if (checkLine(col, row, 1, -1)) return;
+  }
+
+  function checkLine(col: number, row: number, dCol: number, dRow: number) {
+    let count = 0;
+    let player = board.value[col][row];
+
+    for (let i = 0; i < 5; i++) {
+      let newCol = col + i * dCol;
+      let newRow = row + i * dRow;
+
+      if (
+        newCol >= 0 &&
+        newCol < boardSize.value &&
+        newRow >= 0 &&
+        newRow < boardSize.value
+      ) {
+        if (board.value[newCol][newRow] === player) {
+          count++;
+        } else {
+          break;
+        }
+      }
+    }
+
+    if (count === 5) {
+      winner.value = player === Tile.Black ? 'player' : 'computer';
+    }
+  }
+
+  function winCheck() {
     if (playerCaptures.value === 5) {
       winner.value = 'player';
       return;
@@ -55,102 +98,13 @@ export function useGame() {
       winner.value = 'computer';
       return;
     }
-    // Check horizontally
+
+    // Iterate over the entire board
     for (let i = 0; i < boardSize.value; i++) {
-      if (
-        board.value[col][i] === Tile.Black &&
-        board.value[col][i + 1] === Tile.Black &&
-        board.value[col][i + 2] === Tile.Black &&
-        board.value[col][i + 3] === Tile.Black &&
-        board.value[col][i + 4] === Tile.Black
-      ) {
-        winner.value = 'player';
-        return;
-      }
-      if (
-        board.value[col][i] === Tile.White &&
-        board.value[col][i + 1] === Tile.White &&
-        board.value[col][i + 2] === Tile.White &&
-        board.value[col][i + 3] === Tile.White &&
-        board.value[col][i + 4] === Tile.White
-      ) {
-        winner.value = 'computer';
-        return;
-      }
-    }
-
-    // Check vertically
-    for (let i = 0; i < boardSize.value; i++) {
-      if (
-        board.value[i][row] === Tile.Black &&
-        board.value[i + 1][row] === Tile.Black &&
-        board.value[i + 2][row] === Tile.Black &&
-        board.value[i + 3][row] === Tile.Black &&
-        board.value[i + 4][row] === Tile.Black
-      ) {
-        winner.value = 'player';
-        return;
-      }
-      if (
-        board.value[i][row] === Tile.White &&
-        board.value[i + 1][row] === Tile.White &&
-        board.value[i + 2][row] === Tile.White &&
-        board.value[i + 3][row] === Tile.White &&
-        board.value[i + 4][row] === Tile.White
-      ) {
-        winner.value = 'computer';
-        return;
-      }
-    }
-
-    // Check diagonally
-    for (let i = 0; i < boardSize.value - 4; i++) {
-      for (let j = 0; j < boardSize.value - 4; j++) {
-        if (
-          board.value[i][j] === Tile.Black &&
-          board.value[i + 1][j + 1] === Tile.Black &&
-          board.value[i + 2][j + 2] === Tile.Black &&
-          board.value[i + 3][j + 3] === Tile.Black &&
-          board.value[i + 4][j + 4] === Tile.Black
-        ) {
-          winner.value = 'player';
-          return;
-        }
-        if (
-          board.value[i][j] === Tile.White &&
-          board.value[i + 1][j + 1] === Tile.White &&
-          board.value[i + 2][j + 2] === Tile.White &&
-          board.value[i + 3][j + 3] === Tile.White &&
-          board.value[i + 4][j + 4] === Tile.White
-        ) {
-          winner.value = 'computer';
-          return;
-        }
-      }
-    }
-
-    // Check diagonally (secondary diagonal)
-    for (let i = 0; i < boardSize.value - 4; i++) {
-      for (let j = 4; j < boardSize.value; j++) {
-        if (
-          board.value[i][j] === Tile.Black &&
-          board.value[i + 1][j - 1] === Tile.Black &&
-          board.value[i + 2][j - 2] === Tile.Black &&
-          board.value[i + 3][j - 3] === Tile.Black &&
-          board.value[i + 4][j - 4] === Tile.Black
-        ) {
-          winner.value = 'player';
-          return;
-        }
-        if (
-          board.value[i][j] === Tile.White &&
-          board.value[i + 1][j - 1] === Tile.White &&
-          board.value[i + 2][j - 2] === Tile.White &&
-          board.value[i + 3][j - 3] === Tile.White &&
-          board.value[i + 4][j - 4] === Tile.White
-        ) {
-          winner.value = 'computer';
-          return;
+      for (let j = 0; j < boardSize.value; j++) {
+        // Check for a win condition if the tile is not empty
+        if (board.value[i][j] !== Tile.Empty) {
+          checkLineWin(i, j);
         }
       }
     }
