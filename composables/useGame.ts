@@ -36,8 +36,7 @@ export function useGame() {
   }
 
   function placeStone(col: number, row: number) {
-    let clickedTile = board.value[col][row];
-    if (clickedTile != Tile.Empty) return;
+    if (board.value[col][row] != Tile.Empty) return;
 
     board.value[col][row] = Tile.Black;
     while (true) {
@@ -57,24 +56,6 @@ export function useGame() {
     checkLine(col, row, 0, 1);
     checkLine(col, row, 1, 1);
     checkLine(col, row, 1, -1);
-  }
-
-  function checkForCapture(col: number, row: number) {
-    checkCapture(col, row, 1, 0); // Right
-    checkCapture(col, row, -1, 0); // Left
-    checkCapture(col, row, 0, 1); // Down
-    checkCapture(col, row, 0, -1); // Up
-  }
-
-  function checkCapture(col: number, row: number, dCol: number, dRow: number) {
-    let count = 0;
-    let player = board.value[col][row];
-    // let pieces[];
-
-
-    for (let i = 0; i < 5; i++) {
-      
-    }
   }
 
   function checkLine(col: number, row: number, dCol: number, dRow: number) {
@@ -103,6 +84,15 @@ export function useGame() {
       winner.value = player === Tile.Black ? 'player' : 'computer';
     }
   }
+
+  function checkForCapture(col: number, row: number) {
+    checkCapture(col, row, 1, 0);
+    checkCapture(col, row, -1, 0);
+    checkCapture(col, row, 0, 1);
+    checkCapture(col, row, 0, -1);
+  }
+
+  function checkCapture(col: number, row: number, dCol: number, dRow: number) {}
 
   function winCheck() {
     for (let i = 0; i < boardSize.value; i++) {
