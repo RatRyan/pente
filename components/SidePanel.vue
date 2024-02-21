@@ -39,7 +39,7 @@ function backToMenu() {
         </div>
       </div>
       <div v-if="gameStarted" class="game-status">
-        <div v-if="winner == null" class="capture-trackers">
+        <div v-if="winner == null" class="capturppe-trackers">
           <div class="stat-tracker">
             <h2>Player Captures: {{ playerCaptures }}</h2>
           </div>
