@@ -11,7 +11,7 @@ export function useGame() {
   }
 
   const board = useState<Tile[][]>('board', () => []);
-  const boardSize.value = useState('boardSize.value', () => 19);
+  const boardSize = useState('boardSize', () => 19);
   const tileSize = useState('tileSize', () => '');
   const playerCaptures = useState('playerCaptures', () => 0);
   const computerCaptures = useState('computersCaptures', () => 0);
@@ -125,48 +125,7 @@ export function useGame() {
   }
 
   function captureCheck(col: number, row: number) {
-    const currentTile = board.value[col][row];
-    const opponentTile = currentTile === Tile.Black ? Tile.White : Tile.Black;
-
-    // Check if the current tile is not empty and is the player's chip
-    if (currentTile !== Tile.Empty) {
-      // Check all directions for the opponent's chips
-      const directions = [
-        [-1, 0], // Left
-        [1, 0],  // Right
-        [0, -1], // Up
-        [0, 1]   // Down
-      ];
-
-      for (const [dx, dy] of directions) {
-        const newCol = col + dx;
-        const newRow = row + dy;
-
-        // Check if the new position is within the board boundaries
-        if (newCol >= 0 && newCol < boardSize && newRow >= 0 && newRow < boardSize) {
-          // Check if the tile is the opponent's chip
-          if (board.value[newCol][newRow] === opponentTile) {
-            // Check the next tile in the same direction for the opponent's chip
-            const nextCol = newCol + dx;
-            const nextRow = newRow + dy;
-
-            if (nextCol >= 0 && nextCol < boardSize && nextRow >= 0 && nextRow < boardSize) {
-              if (board.value[nextCol][nextRow] === opponentTile) {
-                // The player's chip is sandwiched between two of the opponent's chips
-                // Set the player's chip to empty
-                board.value[col][row] = Tile.Empty;
-                // Increment the capture count for the current player
-                // ...
-                switch (isPlayerTurn) {
-                  case true
-                }
-                return; // Exit the function after capturing
-              }
-            }
-          }
-        }
-      }
-    }
+    
   }
 
   return {
