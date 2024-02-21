@@ -1,5 +1,5 @@
 <script setup lang="ts">
-const { gameStarted, setupBoard, board } = useGame();
+const { gameStarted, setupBoard, playerCaptures, computerCaptures } = useGame();
 
 const newGame = ref(false);
 const gridSize = ref(19);
@@ -39,10 +39,10 @@ function backToMenu() {
       <div v-if="gameStarted" class="game-status">
         <div class="capture-trackers">
           <div class="stat-tracker">
-            <h2>Player Captures: {{ 0 }}</h2>
+            <h2>Player Captures: {{ playerCaptures }}</h2>
           </div>
           <div class="stat-tracker">
-            <h2>Computer Captures: {{ 0 }}</h2>
+            <h2>Computer Captures: {{ computerCaptures }}</h2>
           </div>
         </div>
         <div>

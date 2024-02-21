@@ -50,6 +50,8 @@ export function useGame() {
     tileSize,
     board,
     gameStarted,
+    playerCaptures,
+    computerCaptures,
     setupBoard,
     placeStone,
     winner,
