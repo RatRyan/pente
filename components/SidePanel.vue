@@ -1,4 +1,5 @@
 <script setup lang="ts">
+
 const { gameStarted, setupBoard, playerCaptures, computerCaptures } = useGame();
 
 const newGame = ref(false);
