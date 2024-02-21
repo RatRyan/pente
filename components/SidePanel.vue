@@ -16,6 +16,7 @@ function startGame() {
 function backToMenu() {
   gameStarted.value = false;
   newGame.value = false;
+  winner.value = null;
 }
 </script>
 
