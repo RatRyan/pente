@@ -9,6 +9,9 @@ function startGame() {
   if (gridSize.value > 39 || gridSize.value < 9 || gridSize.value % 2 != 1)
     return;
 
+  playerCaptures.value = 0;
+  computerCaptures.value = 0;
+  winner.value = null;
   setupBoard(gridSize.value);
   gameStarted.value = true;
 }
