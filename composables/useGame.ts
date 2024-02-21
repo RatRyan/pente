@@ -52,14 +52,14 @@ export function useGame() {
         break;
       }
     }
-    winCheck(col, row);
+    winCheck();
   }
 
   function checkLineWin(col: number, row: number) {
-    if (checkLine(col, row, 1, 0)) return;
-    if (checkLine(col, row, 0, 1)) return;
-    if (checkLine(col, row, 1, 1)) return;
-    if (checkLine(col, row, 1, -1)) return;
+    checkLine(col, row, 1, 0);
+    checkLine(col, row, 0, 1);
+    checkLine(col, row, 1, 1);
+    checkLine(col, row, 1, -1);
   }
 
   function checkLine(col: number, row: number, dCol: number, dRow: number) {
@@ -110,7 +110,7 @@ export function useGame() {
     }
   }
 
-  function captureCheck(col: number, row: number) { }
+  function captureCheck(col: number, row: number) {}
 
   return {
     Tile,
