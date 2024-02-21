@@ -60,10 +60,6 @@ export function useGame() {
     return x >= 0 && x < boardSize.value && y >= 0 && y < boardSize.value;
   }
 
-  function isOppositeColor(tile: Tile, stoneColor: Tile): boolean {
-    return tile === (stoneColor === Tile.Black ? Tile.White : Tile.Black);
-  }
-
   function checkLineWin(col: number, row: number) {
     checkLine(col, row, 1, 0); // Horizontal
     checkLine(col, row, 0, 1); // Vertical
