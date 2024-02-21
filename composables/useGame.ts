@@ -35,70 +35,83 @@ export function useGame() {
     board.value[center][center] = Tile.White;
   }
 
-  function placeStone(col: number, row: number) {
-    if (board.value[col][row] != Tile.Empty) return;
+  function placeStone(x: number, y: number) {
+    if (board.value[x][y] != Tile.Empty) return;
 
-    board.value[col][row] = Tile.Black;
+    // Place player stone
+    board.value[x][y] = Tile.Black;
+
+    // Computer randomly chooses a tile
     while (true) {
-      const row = Math.floor(Math.random() * boardSize.value);
-      const col = Math.floor(Math.random() * boardSize.value);
+      const x = Math.floor(Math.random() * boardSize.value);
+      const y = Math.floor(Math.random() * boardSize.value);
 
-      if (board.value[col][row] == Tile.Empty) {
-        board.value[col][row] = Tile.White;
+      if (board.value[x][y] == Tile.Empty) {
+        board.value[x][y] = Tile.White;
         break;
       }
     }
-    winCheck();
+
+    checkForCapture(x, y);
+    checkForWin();
   }
 
   function checkLineWin(col: number, row: number) {
-    checkLine(col, row, 1, 0);
-    checkLine(col, row, 0, 1);
-    checkLine(col, row, 1, 1);
-    checkLine(col, row, 1, -1);
+    checkLine(col, row, 1, 0); // Horizontal
+    checkLine(col, row, 0, 1); // Vertical
+    checkLine(col, row, 1, 1); // First Diagonal
+    checkLine(col, row, 1, -1); // Second Diagonal
   }
 
-  function checkLine(col: number, row: number, dCol: number, dRow: number) {
+  function checkLine(col: number, row: number, xDir: number, yDir: number) {
+    let stoneColor = board.value[col][row];
     let count = 0;
-    let stone = board.value[col][row];
 
     for (let i = 0; i < 5; i++) {
-      const currentCol = col + i * dCol;
-      const currentRow = row + i * dRow;
+      // Get the next column to check by adding 1 to the current column
+      // and then multiplying it by the direction to navigate in
+      const currentCol = col + i * xDir;
+      const currentRow = row + i * yDir;
 
-      // Checks for in-boudsd
-      if (currentCol < 0 || currentRow < 0) break;
-      if (currentCol > boardSize.value || currentRow > boardSize.value) break;
-      if (board.value[currentCol][currentRow] !== stone) break;
+      // Checks for in-bounds and same stones are the same color
+      if (currentCol < 0 || currentCol >= boardSize.value) break;
+      if (currentRow < 0 || currentRow >= boardSize.value) break;
+      if (board.value[currentCol][currentRow] !== stoneColor) break;
 
       // If all checks pass, increment the counter
       count++;
     }
 
+    if (stoneColor === Tile.Black && count > 1) {
+      console.log(`Found ${count} in a line`);
+    }
     if (count === 5) {
-      winner.value = stone === Tile.Black ? 'player' : 'computer';
+      winner.value = stoneColor === Tile.Black ? 'player' : 'computer';
     }
   }
 
   function checkForCapture(col: number, row: number) {
-    checkCapture(col, row, 1, 0);
-    checkCapture(col, row, -1, 0);
-    checkCapture(col, row, 0, 1);
-    checkCapture(col, row, 0, -1);
+    checkCapture(col, row, 1, 0); // Right
+    checkCapture(col, row, -1, 0); // Left
+    checkCapture(col, row, 0, 1); // Down
+    checkCapture(col, row, 0, -1); // Up
   }
 
-  function checkCapture(col: number, row: number, xDir: number, yDir: number) {}
+  function checkCapture(col: number, row: number, xDir: number, yDir: number) {
+    let stoneColor = board.value[col][row];
+  }
 
-  function winCheck() {
+  function checkForWin() {
+    // Check for a line win
     for (let i = 0; i < boardSize.value; i++) {
       for (let j = 0; j < boardSize.value; j++) {
-        if (board.value[i][j] !== Tile.Empty) {
+        if (board.value[i][j] != Tile.Empty) {
           checkLineWin(i, j);
-          checkForCapture(i, j);
         }
       }
     }
 
+    // Check for a capture win
     if (playerCaptures.value === 5) {
       winner.value = 'player';
       return;
