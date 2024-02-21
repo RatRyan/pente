@@ -43,29 +43,37 @@ export function useGame() {
 
     board.value[col][row] = Tile.Black;
     isPlayerTurn.value = false;
-    winCheck(col, row)
+    winCheck(col, row);
   }
 
   function winCheck(col: number, row: number) {
     if (playerCaptures.value === 5) {
-      winner.value = 'player'
-      return
+      winner.value = 'player';
+      return;
     }
     if (computerCaptures.value === 5) {
-      winner.value = 'computer'
-      return
+      winner.value = 'computer';
+      return;
     }
     // Check horizontally
     for (let i = 0; i < boardSize.value; i++) {
-      if (board.value[col][i] === Tile.Black && board.value[col][i + 1] === Tile.Black &&
-        board.value[col][i + 2] === Tile.Black && board.value[col][i + 3] === Tile.Black &&
-        board.value[col][i + 4] === Tile.Black) {
+      if (
+        board.value[col][i] === Tile.Black &&
+        board.value[col][i + 1] === Tile.Black &&
+        board.value[col][i + 2] === Tile.Black &&
+        board.value[col][i + 3] === Tile.Black &&
+        board.value[col][i + 4] === Tile.Black
+      ) {
         winner.value = 'player';
         return;
       }
-      if (board.value[col][i] === Tile.White && board.value[col][i + 1] === Tile.White &&
-        board.value[col][i + 2] === Tile.White && board.value[col][i + 3] === Tile.White &&
-        board.value[col][i + 4] === Tile.White) {
+      if (
+        board.value[col][i] === Tile.White &&
+        board.value[col][i + 1] === Tile.White &&
+        board.value[col][i + 2] === Tile.White &&
+        board.value[col][i + 3] === Tile.White &&
+        board.value[col][i + 4] === Tile.White
+      ) {
         winner.value = 'computer';
         return;
       }
@@ -73,15 +81,23 @@ export function useGame() {
 
     // Check vertically
     for (let i = 0; i < boardSize.value; i++) {
-      if (board.value[i][row] === Tile.Black && board.value[i + 1][row] === Tile.Black &&
-        board.value[i + 2][row] === Tile.Black && board.value[i + 3][row] === Tile.Black &&
-        board.value[i + 4][row] === Tile.Black) {
+      if (
+        board.value[i][row] === Tile.Black &&
+        board.value[i + 1][row] === Tile.Black &&
+        board.value[i + 2][row] === Tile.Black &&
+        board.value[i + 3][row] === Tile.Black &&
+        board.value[i + 4][row] === Tile.Black
+      ) {
         winner.value = 'player';
         return;
       }
-      if (board.value[i][row] === Tile.White && board.value[i + 1][row] === Tile.White &&
-        board.value[i + 2][row] === Tile.White && board.value[i + 3][row] === Tile.White &&
-        board.value[i + 4][row] === Tile.White) {
+      if (
+        board.value[i][row] === Tile.White &&
+        board.value[i + 1][row] === Tile.White &&
+        board.value[i + 2][row] === Tile.White &&
+        board.value[i + 3][row] === Tile.White &&
+        board.value[i + 4][row] === Tile.White
+      ) {
         winner.value = 'computer';
         return;
       }
@@ -90,15 +106,23 @@ export function useGame() {
     // Check diagonally
     for (let i = 0; i < boardSize.value - 4; i++) {
       for (let j = 0; j < boardSize.value - 4; j++) {
-        if (board.value[i][j] === Tile.Black && board.value[i + 1][j + 1] === Tile.Black &&
-          board.value[i + 2][j + 2] === Tile.Black && board.value[i + 3][j + 3] === Tile.Black &&
-          board.value[i + 4][j + 4] === Tile.Black) {
+        if (
+          board.value[i][j] === Tile.Black &&
+          board.value[i + 1][j + 1] === Tile.Black &&
+          board.value[i + 2][j + 2] === Tile.Black &&
+          board.value[i + 3][j + 3] === Tile.Black &&
+          board.value[i + 4][j + 4] === Tile.Black
+        ) {
           winner.value = 'player';
           return;
         }
-        if (board.value[i][j] === Tile.White && board.value[i + 1][j + 1] === Tile.White &&
-          board.value[i + 2][j + 2] === Tile.White && board.value[i + 3][j + 3] === Tile.White &&
-          board.value[i + 4][j + 4] === Tile.White) {
+        if (
+          board.value[i][j] === Tile.White &&
+          board.value[i + 1][j + 1] === Tile.White &&
+          board.value[i + 2][j + 2] === Tile.White &&
+          board.value[i + 3][j + 3] === Tile.White &&
+          board.value[i + 4][j + 4] === Tile.White
+        ) {
           winner.value = 'computer';
           return;
         }
@@ -108,15 +132,23 @@ export function useGame() {
     // Check diagonally (secondary diagonal)
     for (let i = 0; i < boardSize.value - 4; i++) {
       for (let j = 4; j < boardSize.value; j++) {
-        if (board.value[i][j] === Tile.Black && board.value[i + 1][j - 1] === Tile.Black &&
-          board.value[i + 2][j - 2] === Tile.Black && board.value[i + 3][j - 3] === Tile.Black &&
-          board.value[i + 4][j - 4] === Tile.Black) {
+        if (
+          board.value[i][j] === Tile.Black &&
+          board.value[i + 1][j - 1] === Tile.Black &&
+          board.value[i + 2][j - 2] === Tile.Black &&
+          board.value[i + 3][j - 3] === Tile.Black &&
+          board.value[i + 4][j - 4] === Tile.Black
+        ) {
           winner.value = 'player';
           return;
         }
-        if (board.value[i][j] === Tile.White && board.value[i + 1][j - 1] === Tile.White &&
-          board.value[i + 2][j - 2] === Tile.White && board.value[i + 3][j - 3] === Tile.White &&
-          board.value[i + 4][j - 4] === Tile.White) {
+        if (
+          board.value[i][j] === Tile.White &&
+          board.value[i + 1][j - 1] === Tile.White &&
+          board.value[i + 2][j - 2] === Tile.White &&
+          board.value[i + 3][j - 3] === Tile.White &&
+          board.value[i + 4][j - 4] === Tile.White
+        ) {
           winner.value = 'computer';
           return;
         }
@@ -124,9 +156,7 @@ export function useGame() {
     }
   }
 
-  function captureCheck(col: number, row: number) {
-    
-  }
+  function captureCheck(col: number, row: number) {}
 
   return {
     Tile,
@@ -138,6 +168,6 @@ export function useGame() {
     setupBoard,
     placeStone,
     winner,
-    boardSize
+    boardSize,
   };
 }
