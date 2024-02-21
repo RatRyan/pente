@@ -60,28 +60,23 @@ export function useGame() {
 
   function checkLine(col: number, row: number, dCol: number, dRow: number) {
     let count = 0;
-    let player = board.value[col][row];
+    let stone = board.value[col][row];
 
     for (let i = 0; i < 5; i++) {
-      let newCol = col + i * dCol;
-      let newRow = row + i * dRow;
+      const currentCol = col + i * dCol;
+      const currentRow = row + i * dRow;
 
-      if (
-        newCol >= 0 &&
-        newCol < boardSize.value &&
-        newRow >= 0 &&
-        newRow < boardSize.value
-      ) {
-        if (board.value[newCol][newRow] === player) {
-          count++;
-        } else {
-          break;
-        }
-      }
+      // Checks for in-boudsd
+      if (currentCol < 0 || currentRow < 0) break;
+      if (currentCol > boardSize.value || currentRow > boardSize.value) break;
+      if (board.value[currentCol][currentRow] !== stone) break;
+
+      // If all checks pass, increment the counter
+      count++;
     }
 
     if (count === 5) {
-      winner.value = player === Tile.Black ? 'player' : 'computer';
+      winner.value = stone === Tile.Black ? 'player' : 'computer';
     }
   }
 
@@ -92,7 +87,7 @@ export function useGame() {
     checkCapture(col, row, 0, -1);
   }
 
-  function checkCapture(col: number, row: number, dCol: number, dRow: number) {}
+  function checkCapture(col: number, row: number, xDir: number, yDir: number) {}
 
   function winCheck() {
     for (let i = 0; i < boardSize.value; i++) {
