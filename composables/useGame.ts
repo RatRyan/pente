@@ -156,7 +156,7 @@ export function useGame() {
     }
   }
 
-  function captureCheck(col: number, row: number) {}
+  function captureCheck(col: number, row: number) { }
 
   return {
     Tile,
