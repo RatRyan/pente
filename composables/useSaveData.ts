@@ -1,5 +1,6 @@
 export function useSaveData() {
-  const { board, tileSize, gameStarted } = useGame();
+  const { board, tileSize, gameStarted, playerCaptures, computerCaptures } =
+    useGame();
 
   const downloadLink = useState('downloadLink', () => '');
 
@@ -7,6 +8,8 @@ export function useSaveData() {
     const gameData = {
       gameBoard: board.value,
       tileSize: tileSize.value,
+      playerCaptures: playerCaptures.value,
+      computerCaptures: computerCaptures.value,
     };
     const gameDataJson = JSON.stringify(gameData);
     const blob = new Blob([gameDataJson], { type: 'application/json' });
@@ -25,6 +28,8 @@ export function useSaveData() {
 
         board.value = jsonData.gameBoard;
         tileSize.value = jsonData.tileSize;
+        playerCaptures.value = jsonData.playerCaptures;
+        computerCaptures.value = jsonData.computerCaptures;
         gameStarted.value = true;
 
         console.log(jsonData);
