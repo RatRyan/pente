@@ -66,7 +66,7 @@ export function useGame() {
       const currentCol = col + i * dCol;
       const currentRow = row + i * dRow;
 
-      // Checks for in-boudsd
+      // Checks for in-bounds
       if (currentCol < 0 || currentRow < 0) break;
       if (currentCol > boardSize.value || currentRow > boardSize.value) break;
       if (board.value[currentCol][currentRow] !== stone) break;
