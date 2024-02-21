@@ -20,7 +20,7 @@ describe('SidePanel.vue', () => {
 		expect(wrapper.vm.useGame().gameStarted).toBeFalsy();
 	});
 
-		// Test for gridSize less than 9
+	// Test for gridSize less than 9
 	test('should start game only when gridSize is greater than 9, less than 39, and odd', async () => {
 		input.setValue('8');
 		await wrapper.vm.$nextTick();
@@ -28,15 +28,19 @@ describe('SidePanel.vue', () => {
 		expect(wrapper.vm.useGame().gameStarted).toBeFalsy();
 	});
 
-		// // Test for even gridSize
-		// input.setValue('10');
-		// await wrapper.vm.$nextTick();
-		// wrapper.find('button.game-button').trigger('click');
-		// expect(wrapper.vm.useGame().gameStarted).toBe(false);
+	// Test for even gridSize
+	test('should start game only when gridSize is greater than 9, less than 39, and odd', async () => {
+		input.setValue('10');
+		await wrapper.vm.$nextTick();
+		wrapper.find('button.game-button').trigger('click');
+		expect(wrapper.vm.useGame().gameStarted).toBeFalsy();
+	});
 
-		// // Test for valid gridSize
-		// input.setValue('15');
-		// await wrapper.vm.$nextTick();
-		// wrapper.find('button.game-button').trigger('click');
-		// expect(wrapper.vm.useGame().gameStarted).toBe(true);
+	// Test for valid gridSize
+	test('should start game only when gridSize is greater than 9, less than 39, and odd', async () => {
+		input.setValue('15');
+		await wrapper.vm.$nextTick();
+		wrapper.find('button.game-button').trigger('click');
+		expect(wrapper.vm.useGame().gameStarted).toBeFalsy();
+	});
 });
