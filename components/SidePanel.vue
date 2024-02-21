@@ -34,8 +34,8 @@ function backToMenu() {
       <div v-if="!gameStarted && newGame" class="start-game">
         <div class="create-board">
           <label>Enter Board Size:</label>
-          <input type="number" v-model="gridSize" class="board-size" />
-          <button @click="startGame()" class="game-button">Start Game</button>
+          <input type="number" id="sizeInput" v-model="gridSize" class="board-size" />
+          <button id="startGame" @click="startGame()" class="game-button">Start Game</button>
         </div>
       </div>
       <div v-if="gameStarted" class="game-status">
